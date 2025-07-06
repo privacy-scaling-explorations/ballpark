@@ -10,6 +10,8 @@ import { Key, RtcPairSocket } from 'rtc-pair-socket';
 
 type PageKind =
   | 'Home'
+  | 'About'
+  | 'Start'
   | 'Share'
   | 'Host'
   | 'Join'

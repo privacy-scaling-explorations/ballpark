@@ -28,7 +28,7 @@ body {
   line-height: 1.5;
   font-weight: 400;
 
-  background-color: #90e2d3;
+  background-color: #74e094;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -74,7 +74,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1613c1;
+  background-color: #5313c1;
   cursor: pointer;
   transition: border-color 0.25s;
   color: white;

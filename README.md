@@ -1,8 +1,8 @@
-# MPC Lizard Spock
+# Ballpark
 
-Rock Paper Scissors Lizard Spock using MPC.
+Compare salaries using MPC.
 
-Try it: https://mpc.pse.dev/apps/lizard-spock
+Try it: https://mpc.pse.dev/apps/ballpark
 
 Built using [MPC framework](https://github.com/privacy-scaling-explorations/mpc-framework) using a
-[secure 2PC backend](https://github.com/privacy-scaling-explorations/emp-wasm-backend).
+[secure 2PC backend](https://github.com/privacy-scaling-explorations/emp-wasm-engine).

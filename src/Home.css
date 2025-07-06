@@ -3,6 +3,11 @@
   text-align: center;
 }
 
+.subtitle {
+  font-size: calc(0.03 * var(--aw));
+  text-align: center;
+}
+
 .main.buttons {
   text-align: center;
   padding: 1rem;
