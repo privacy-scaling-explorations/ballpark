@@ -1,0 +1,15 @@
+.title {
+  font-size: calc(0.07 * var(--aw));
+  text-align: center;
+}
+
+.main.buttons {
+  text-align: center;
+  padding: 1rem;
+}
+
+.main.buttons :not(:first-child) {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+}
