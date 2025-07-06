@@ -32,10 +32,10 @@ export default function Home() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7em' }}>
         <div>
           This&nbsp;
-          <a href='https://github.com/voltrevo/mpc-lizard-spock'>
+          <a href='https://github.com/privacy-scaling-explorations/ballpark/'>
             open source
           </a> app uses&nbsp;
-          <a href='https://github.com/voltrevo/mpc-framework'>
+          <a href='https://github.com/privacy-scaling-explorations/mpc-framework/'>
             secure MPC
           </a> to calculate the result while keeping your input secret.
         </div>
