@@ -6,65 +6,61 @@ export default function About() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div className="title">About</div>
       <div>
         <p>
-          This app helps you compare your compensation. People are
-          understandably reluctant to share their compensation, but these
-          comparisons can be extremely valuable. If you earn much less than your
-          peer, then learning this gives you an opportunity to do something
-          about it. It's also possible that there is tension because you suspect
-          the pay is very different, and learning that you actually earn about
-          the same can ease this tension.
+          Comparing compensation is tricky. On the one hand, it could be
+          extremely valuable to learn how your compensation stacks up. On the
+          other, most people don't really want other people to know their
+          compensation:
+          <ul>
+            <li>
+              If the difference is small, it's still unnecessarily awkward
+            </li>
+            <li>
+              If the difference is very large, it could be a social disaster
+            </li>
+          </ul>
         </p>
         <p>
-          Ballpark helps enable these comparisons by removing the need to share
-          your exact compensation number with anyone. Ballpark uses cryptography
-          to only reveal one of three outcomes:
+          Ballpark proposes to solve this problem using advanced cryptography.
+          No one has to share their exact compensation. Instead each of you will
+          learn only one of the following:
           <ol>
             <li>You earn less</li>
             <li>You earn about the same</li>
             <li>You earn more</li>
           </ol>
         </p>
-      </div>
-      <h2>How it Works</h2>
-      <ol style={{ margin: 0 }}>
-        <li>
-          <a
-            href="#"
-            onClick={() => {
-              ctx.page.set("Share");
-            }}
-          >
-            Share
-          </a>
-          &nbsp;this app with your friend.
-        </li>
-        <li>Host a session.</li>
-        <li>Choose the meaning of 'about the same'.</li>
-        <li>Get your friend to join.</li>
-        <li>Input your compensation.</li>
-        <li>Result will be calculated.</li>
-      </ol>
-      <h2>Cryptography</h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.7em" }}>
-        <div>
-          This&nbsp;
+        <p>
+          Discovering a significant difference might still be painful, but
+          hopefully the upside of learning this information makes it worthwhile.
+          The size of the difference remains secret, which should limit the
+          social impact.
+        </p>
+        <p>
+          Ballpark is&nbsp;
           <a href="https://github.com/privacy-scaling-explorations/ballpark/">
             open source
           </a>{" "}
-          app uses&nbsp;
+          and uses&nbsp;
           <a href="https://github.com/privacy-scaling-explorations/mpc-framework/">
             secure MPC
           </a>{" "}
-          to calculate the result while keeping your input secret.
-        </div>
+          to calculate the result while keeping your input secret. It's entirely
+          peer to peer and all of the cryptography occurs on your personal
+          devices. You are not trusting any servers when using Ballpark.
+        </p>
       </div>
-      <div className="main buttons">
-        <button onClick={() => ctx.page.set("Home")}>
-          Home
-        </button>
-      </div>
+      <button
+        onClick={() => ctx.page.set("Home")}
+        style={{ width: "70%", alignSelf: "center" }}
+      >
+        Home
+      </button>
+      <div />
+      <div />
+      <div />
     </div>
   );
 }

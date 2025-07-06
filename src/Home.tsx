@@ -1,6 +1,5 @@
 import "./Home.css";
 import Ctx from "./Ctx";
-import gameDiagramSrc from "./assets/GameDiagram.svg";
 
 export default function Home() {
   const ctx = Ctx.use();
