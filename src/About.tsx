@@ -9,9 +9,8 @@ export default function About() {
       <div className="title">About</div>
       <div>
         <p>
-          Comparing compensation is tricky. On the one hand, it could be
-          extremely valuable to learn how your compensation stacks up. On the
-          other, most people don't really want other people to know their
+          Comparing compensation is tricky. It's so valuable to know where you
+          stand, but most people don't really want other people to know their
           compensation:
           <ul>
             <li>
@@ -23,7 +22,7 @@ export default function About() {
           </ul>
         </p>
         <p>
-          Ballpark proposes to solve this problem using advanced cryptography.
+          Ballpark proposes to solve this problem using MPC cryptography.
           No one has to share their exact compensation. Instead each of you will
           learn only one of the following:
           <ol>
