@@ -36,6 +36,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   --aw: min(100vw, calc(0.6 * 100vh)); /* app width */
+  --btn-color: #5313c1;
 }
 
 #root {
@@ -74,7 +75,7 @@ button {
   font-size: 1.5em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #5313c1;
+  background-color: var(--btn-color);
   cursor: pointer;
   transition: border-color 0.25s;
   color: white;
@@ -87,4 +88,19 @@ button.secondary {
 button:disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+.inc-dec-btn {
+  border-radius: 50%;
+  background-color: var(--btn-color);
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.inc-dec-btn:active {
+  filter: brightness(0.8);
 }

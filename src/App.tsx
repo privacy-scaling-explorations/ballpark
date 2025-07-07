@@ -12,7 +12,7 @@ import Waiting from './Waiting';
 import isKey from './isKey';
 import never from './never';
 import About from './About';
-import Start from './Start';
+import Setup from './Setup';
 
 function App() {
   const ctx = Ctx.use();
@@ -52,8 +52,8 @@ function App() {
     content = <Error />;
   } else if (page === 'About') {
     content = <About />;
-  } else if (page === 'Start') {
-    content = <Start />;
+  } else if (page === 'Setup') {
+    content = <Setup />;
   } else {
     never(page);
   }

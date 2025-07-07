@@ -16,7 +16,7 @@ export default function Home() {
       <button onClick={() => ctx.page.set("About")} style={{ width: "70%", alignSelf: "center" }}>
         About
       </button>
-      <button onClick={() => ctx.page.set("Start")} style={{ width: "70%", alignSelf: "center" }}>
+      <button onClick={() => ctx.page.set("Setup")} style={{ width: "70%", alignSelf: "center" }}>
         Start
       </button>
     </div>

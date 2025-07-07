@@ -11,7 +11,7 @@ import { Key, RtcPairSocket } from 'rtc-pair-socket';
 type PageKind =
   | 'Home'
   | 'About'
-  | 'Start'
+  | 'Setup'
   | 'Share'
   | 'Host'
   | 'Join'
@@ -38,6 +38,7 @@ const rtcConfig = (() => {
 export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
   page = new UsableField<PageKind>('Home');
   mode: 'Host' | 'Join' = 'Host';
+  tolerancePct = new UsableField(15);
   key = new UsableField(Key.random());
   socket = new UsableField<RtcPairSocket | undefined>(undefined);
   msgQueue = new AsyncQueue<unknown>();
