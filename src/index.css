@@ -94,13 +94,33 @@ button:disabled {
   border-radius: 50%;
   background-color: var(--btn-color);
   color: white;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   cursor: pointer;
   user-select: none;
 }
 
 .inc-dec-btn:active {
   filter: brightness(0.8);
+}
+
+.example-table {
+  border-collapse: collapse;
+}
+
+.example-table tbody tr {
+  border-top: 1px solid #00000044;
+}
+
+.example-table td, .example-table th {
+  padding: 0.2rem 0.8rem;
+}
+
+.example-table td:not(:last-child) {
+  text-align: right;
 }

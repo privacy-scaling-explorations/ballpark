@@ -59,9 +59,7 @@ function App() {
   }
 
   return <>
-    <div style={{ flexGrow: 1 }} />
     {content}
-    <div style={{ flexGrow: 1 }}></div>
   </>;
 }
 
