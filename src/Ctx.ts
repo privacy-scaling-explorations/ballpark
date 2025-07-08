@@ -18,7 +18,7 @@ type PageKind =
   | 'Join'
   | 'CheckTolerance'
   | 'Connecting'
-  | 'Choose'
+  | 'Input'
   | 'Waiting'
   | 'Calculating'
   | 'Result'
@@ -161,7 +161,7 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
     if (this.mode === "Join") {
       this.page.set('CheckTolerance');
     } else {
-      this.page.set('Choose');
+      this.page.set('Input');
     }
 
     const FriendMsg = z.object({
