@@ -38,17 +38,14 @@ export default function About() {
           social impact.
         </p>
         <p>
-          Ballpark is&nbsp;
-          <a href="https://github.com/privacy-scaling-explorations/ballpark/">
-            open source
-          </a>{" "}
-          and uses&nbsp;
-          <a href="https://github.com/privacy-scaling-explorations/mpc-framework/">
-            secure MPC
-          </a>{" "}
-          to calculate the result while keeping your input secret. It's entirely
-          peer to peer and all of the cryptography occurs on your personal
-          devices. You are not trusting any servers when using Ballpark.
+          The result is calculated in an entirely peer to peer way. No servers
+          are involved in the cryptography or can otherwise see your input. Only
+          your peer can see anything useful, and the only useful information
+          they can get is the result, even if they use a modified app.
+        </p>
+        <p>
+          Ballpark is powered by <a href="https://mpc.pse.dev/">MPC Framework</a> which is an R&D project funded by
+          the <a href="https://ethereum.org/">Ethereum</a> Foundation.
         </p>
       </div>
       <button
