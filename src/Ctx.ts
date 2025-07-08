@@ -16,6 +16,7 @@ type PageKind =
   | 'Share'
   | 'Host'
   | 'Join'
+  | 'CheckTolerance'
   | 'Connecting'
   | 'Choose'
   | 'Waiting'
@@ -120,7 +121,12 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
 
     socket.on('message', message => {
       if (!MessageInit.safeParse(message).error) {
-        socket.send({ from: 'host', type: 'start' });
+        socket.send({
+          from: 'host',
+          type: 'start',
+          tolerancePct: this.tolerancePct.value,
+        });
+
         this.runProtocol(socket).catch(this.handleProtocolError);
       }
     });
@@ -139,8 +145,11 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
     socket.send({ from: 'joiner', type: 'init' });
 
     const listener = (message: unknown) => {
-      if (!MessageStart.safeParse(message).error) {
+      const parseResult = MessageStart.safeParse(message);
+      
+      if (parseResult.success) {
         socket.off('message', listener);
+        this.tolerancePct.set(parseResult.data.tolerancePct);
         this.runProtocol(socket).catch(this.handleProtocolError);
       }
     };
@@ -149,7 +158,11 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
   }
 
   async runProtocol(socket: RtcPairSocket) {
-    this.page.set('Choose');
+    if (this.mode === "Join") {
+      this.page.set('CheckTolerance');
+    } else {
+      this.page.set('Choose');
+    }
 
     const FriendMsg = z.object({
       from: z.literal(this.mode === 'Host' ? 'joiner' : 'host'),

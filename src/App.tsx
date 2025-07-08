@@ -14,6 +14,7 @@ import never from './never';
 import About from './About';
 import Setup from './Setup';
 import HostOrJoin from './HostOrJoin';
+import CheckTolerance from './CheckTolerance';
 
 function App() {
   const ctx = Ctx.use();
@@ -57,6 +58,8 @@ function App() {
     content = <Setup />;
   } else if (page === 'HostOrJoin') {
     content = <HostOrJoin />;
+  } else if (page === 'CheckTolerance') {
+    content = <CheckTolerance />;
   } else {
     never(page);
   }

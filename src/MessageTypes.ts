@@ -10,6 +10,7 @@ export const MessageInit = z.object({
 export const MessageStart = z.object({
   from: z.literal('host'),
   type: z.literal('start'),
+  tolerancePct: z.number(),
 });
 
 export const MessageReady = z.object({
