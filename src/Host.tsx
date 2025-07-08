@@ -8,29 +8,31 @@ export default function Host() {
   const key = ctx.key.use();
 
   const code = key.base58();
+  const inviteLink = `${window.location.origin}${window.location.pathname}#${code}`;
 
   useEffect(() => {
     ctx.host();
   }, [ctx]);
 
   return (
-    <div>
-      <h1>Host</h1>
-      <p>
-        Get your friend to scan:
-      </p>
-      <center>
-        <QRCodeCanvas
-          style={{ width: '100%', height: 'auto' }}
-          bgColor='transparent'
-          value={`${window.location.origin}${window.location.pathname}#${code}`}
-        />
-      </center>
-      <p>
-        Or <CopyToClipboard text={code}>
-          <button style={{ padding: '0.5rem' }}>copy</button>
-        </CopyToClipboard> it and send.
-      </p>
+    <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, gap: "1rem" }}>
+      <div className="title">Host</div>
+      <div style={{ flexGrow: 1 }} />
+      <div>
+        Get your peer to scan:
+      </div>
+      <QRCodeCanvas
+        style={{ width: '100%', height: 'auto' }}
+        bgColor='transparent'
+        value={inviteLink}
+      />
+      <div>
+        Or <CopyToClipboard text={inviteLink}>
+          <button style={{ padding: '0.5rem', fontSize: "1rem" }}>copy this link</button>
+        </CopyToClipboard> and send it to them.
+      </div>
+      <div style={{ flexGrow: 2 }} />
+      <button className="secondary" onClick={() => ctx.page.set("Home")}>Cancel</button>
     </div>
   );
 }

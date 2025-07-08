@@ -124,8 +124,8 @@ export default function Start() {
       </div>
       <div style={{ flexGrow: 2 }} />
       <button
-        onClick={() => ctx.page.set("Home")}
-        style={{ width: "70%", alignSelf: "center" }}
+        onClick={() => ctx.page.set("Host")}
+        style={{ width: "100%" }}
       >
         Continue
       </button>

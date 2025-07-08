@@ -19,7 +19,7 @@ export default function Host() {
         {window.location.href}
       </a>
       <div style={{ flexGrow: 2 }} />
-      <button style={{ width: '70%', alignSelf: 'center' }} onClick={() => ctx.page.set('Home')}>
+      <button style={{ width: '100%' }} onClick={() => ctx.page.set('Home')}>
         Home
       </button>
     </div>

@@ -51,7 +51,7 @@ export default function About() {
       </div>
       <button
         onClick={() => ctx.page.set("Home")}
-        style={{ width: "70%", alignSelf: "center", marginBottom: "3rem" }}
+        style={{ width: "100%", marginBottom: "3rem" }}
       >
         Home
       </button>

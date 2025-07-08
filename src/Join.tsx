@@ -22,9 +22,10 @@ export default function Join() {
   };
 
   return (
-    <div>
-      <h1>Join</h1>
-      <p>Scan your friend's QR code:</p>
+    <div style={{ display: "flex", flexDirection: "column", flexGrow: 1, gap: "1rem" }}>
+      <div className="title">Join</div>
+      <div style={{ flexGrow: 1 }} />
+      <div>Scan your friend's QR code:</div>
       <Scanner
         onResult={(text, _result) => tryJoin(text)}
         onError={error => console.log(error?.message)}
@@ -32,16 +33,20 @@ export default function Join() {
           audio: false,
         }}
       />
-      <p>
+      <div>
         Or paste the code here:
         <input
           type='text'
-          style={{ width: '100%' }}
+          style={{ width: '100%', boxSizing: 'border-box' }}
           onInput={(ev: ChangeEvent<HTMLInputElement>) => {
             tryJoin(ev.target.value);
           }}
         />
-      </p>
+      </div>
+      <div style={{ flexGrow: 2 }} />
+      <button className="secondary" onClick={() => ctx.page.set("Home")} style={{ width: "100%" }}>
+        Cancel
+      </button>
     </div>
   );
 }
