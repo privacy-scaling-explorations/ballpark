@@ -6,6 +6,7 @@ export default function Input() {
   const ctx = Ctx.use();
   const tolerancePct = ctx.tolerancePct.use();
   const [comp, setComp] = useState<number | "">("");
+  const [compTooLarge, setCompTooLarge] = useState(false);
   const sameRange = calculateSameRange(Number(comp), tolerancePct);
 
   return (
@@ -31,10 +32,11 @@ export default function Input() {
 
             if (newValue === "") {
               setComp("");
+              setCompTooLarge(false);
               return;
             }
             
-            const newNumber = Number(newValue);
+            let newNumber = Number(newValue);
 
             if (!Number.isFinite(newNumber) || newNumber < 0) {
               inputEl.value = comp.toString();
@@ -46,6 +48,11 @@ export default function Input() {
               return;
             }
 
+            if (newNumber > 1_000_000_000_000) {
+              newNumber = 1_000_000_000_000;
+              setCompTooLarge(true);
+            }
+
             setComp(newNumber);
           }}
         />
@@ -54,13 +61,16 @@ export default function Input() {
         About the same: {comp === "" ? "(pending)" : `${sameRange.low} - ${sameRange.high}`}.
       </div>
       <div>
-        Make you are using the same definition of "compensation". This should be
-        easy if you have similar circumstances, but if you have different kinds
-        of roles it might be important to discuss things like tax, working
-        hours, currency, and benefits.
+        Make sure you are using the same definition of "compensation". This
+        should be easy if you have similar circumstances, but if you have
+        different kinds of roles it might be important to discuss things like
+        tax, working hours, currency, and benefits.
       </div>
-      <div>
-
+      <div style={{ fontSize: '0.7rem', color: compTooLarge ? '#cc4488' : '' }}>
+        Due to arithmetic limitations, this number is capped at one trillion.
+        If somehow this could be a possibility (eg estimating corporate
+        valuations), then you should discuss N&nbsp;=&nbsp;$N,000,000 or
+        similar.
       </div>
       <div style={{ flexGrow: 2 }} />
       <button

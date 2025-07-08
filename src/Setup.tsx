@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Ctx from "./Ctx";
 import ToleranceSettings from "./ToleranceSettings";
 

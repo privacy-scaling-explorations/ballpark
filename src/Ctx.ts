@@ -24,8 +24,6 @@ type PageKind =
   | 'Result'
   | 'Error';
 
-export type GameOption = 'rock' | 'paper' | 'scissors' | 'lizard' | 'spock';
-
 const rtcConfig = (() => {
   const envVar = import.meta.env.VITE_RTC_CONFIGURATION;
 
@@ -37,7 +35,7 @@ const rtcConfig = (() => {
   return JSON.parse(envVar);
 })();
 
-export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
+export default class Ctx extends Emitter<{ ready(comp: number): void }> {
   page = new UsableField<PageKind>('Home');
   mode: 'Host' | 'Join' = 'Host';
   tolerancePct = new UsableField(15);
@@ -45,9 +43,9 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
   socket = new UsableField<RtcPairSocket | undefined>(undefined);
   msgQueue = new AsyncQueue<unknown>();
   friendReady = false;
-  result = new UsableField<'win' | 'lose' | 'draw' | undefined>(undefined);
+  result = new UsableField<'less' | 'same' | 'more' | undefined>(undefined);
   errorMsg = new UsableField<string>('');
-  choice = new UsableField<GameOption | undefined>(undefined);
+  comp = new UsableField<number | undefined>(undefined);
   mpcProgress = new UsableField<number>(0);
 
   constructor() {
@@ -182,8 +180,8 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
       () => this.msgQueue.shift(),
     );
 
-    const [choice, _readyMsg] = await Promise.all([
-      new Promise<GameOption>(resolve => {
+    const [comp, _readyMsg] = await Promise.all([
+      new Promise<number>(resolve => {
         this.once('ready', resolve);
       }),
       channel.recv(MessageReady).then(msg => {
@@ -198,7 +196,7 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
     const result = await runProtocol(
       this.mode,
       socket,
-      choice,
+      comp,
       percentage => {
         this.mpcProgress.set(percentage);
       },
@@ -222,9 +220,9 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
     this.page.set('Error');
   };
 
-  async send(choice: GameOption) {
-    this.emit('ready', choice);
-    this.choice.set(choice);
+  async setComp(comp: number) {
+    this.emit('ready', comp);
+    this.comp.set(comp);
 
     if (!this.friendReady) {
       this.page.set('Waiting');
@@ -236,37 +234,7 @@ export default class Ctx extends Emitter<{ ready(choice: GameOption): void }> {
     });
   }
 
-  async playAgain() {
-    // Reset game state
-    this.friendReady = false;
-    this.result.set(undefined);
-    this.choice.set(undefined);
-    this.mpcProgress.set(0);
-
-    // Check if socket exists and try to use it
-    // Determine if we have a valid socket to use
-    const useExistingSocket = Boolean(this.socket.value);
-
-    if (useExistingSocket) {
-      try {
-        // Attempt to restart the protocol with existing socket
-        this.runProtocol(this.socket.value!).catch(this.handleProtocolError);
-        return; // Early return to avoid the reconnection code
-      } catch (error) {
-        // Socket exists but unusable, continue to reconnection
-        console.log('Error reusing socket, will reconnect:', error);
-      }
-    }
-
-    // Socket doesn't exist or is unusable, reconnect based on mode
-    if (this.mode === 'Host') {
-      this.host();
-    } else {
-      this.join(this.key.value.base58());
-    }
-  }
-
-  endGame() {
+  reset() {
     window.location.reload();
   }
 

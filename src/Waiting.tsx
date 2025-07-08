@@ -9,13 +9,13 @@ export default function Waiting() {
     // Check if socket exists
     if (!ctx.socket.value) {
       setMessage('Connection lost. The other player may have left the game.');
-      setTimeout(() => ctx.endGame(), 18000); // Return to home after 3 seconds
+      setTimeout(() => ctx.reset(), 18000); // Return to home after 3 seconds
       return;
     }
 
     const handleConnectionLost = () => {
       setMessage('Connection closed. The other player has left the game.');
-      setTimeout(() => ctx.endGame(), 18000); // Return to home after showing message
+      setTimeout(() => ctx.reset(), 18000); // Return to home after showing message
     };
 
     // Add event listener for connection close
@@ -36,7 +36,7 @@ export default function Waiting() {
     <div style={{ textAlign: 'center' }}>
       <h2>{message}</h2>
       <button
-        onClick={() => ctx.endGame()}
+        onClick={() => ctx.reset()}
         className='secondary'
       >
         Cancel and Return Home

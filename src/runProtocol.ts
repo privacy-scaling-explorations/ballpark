@@ -5,15 +5,14 @@ import * as summon from 'summon-ts';
 import { RtcPairSocket } from 'rtc-pair-socket';
 import assert from './assert';
 import AsyncQueue from './AsyncQueue';
-import { GameOption } from './Ctx';
 import getCircuitFiles from './getCircuitFiles';
 
 export default async function runProtocol(
   mode: 'Host' | 'Join',
   socket: RtcPairSocket,
-  choice: GameOption,
+  comp: number,
   onProgress?: (progress: number) => void,
-): Promise<'win' | 'lose' | 'draw'> {
+): Promise<'less' | 'same' | 'more'> {
   const msgQueue = new AsyncQueue<unknown>();
 
   const TOTAL_BYTES = 265148;
@@ -33,28 +32,18 @@ export default async function runProtocol(
 
   const { circuit } = summon.compile({
     path: 'circuit/main.ts',
-    boolifyWidth: 3,
+    boolifyWidth: 48,
     files: await getCircuitFiles(),
   });
 
   const protocol = new mpcf.Protocol(circuit, new EmpWasmEngine());
 
-  const party = mode === 'Host' ? 'player1' : 'player2';
-  const otherParty = mode === 'Host' ? 'player2' : 'player1';
-
-  const optionMap: Record<GameOption, number> = {
-    rock: 1,
-    paper: 2,
-    scissors: 3,
-    lizard: 4,
-    spock: 5,
-  };
-
-  const input = optionMap[choice];
+  const party = mode === 'Host' ? 'party0' : 'party1';
+  const otherParty = mode === 'Host' ? 'party1' : 'party0';
 
   const session = protocol.join(
     party,
-    { [party]: input },
+    { [`${party}Comp`]: comp },
     (to, msg) => {
       assert(to === otherParty);
       socket.send(msg);
@@ -94,10 +83,10 @@ export default async function runProtocol(
     );
   }
 
-  const outputMap: Record<number, 'win' | 'lose' | 'draw' | undefined> = {
-    0: 'draw',
-    1: party === 'player1' ? 'win' : 'lose',
-    2: party === 'player1' ? 'lose' : 'win',
+  const outputMap: Record<number, 'less' | 'same' | 'more' | undefined> = {
+    0: party === 'party0' ? 'more' : 'less',
+    1: party === 'party1' ? 'more' : 'less',
+    2: 'same',
   };
 
   const result = outputMap[output.result];

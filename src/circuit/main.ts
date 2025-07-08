@@ -1,54 +1,39 @@
-const ROCK = 1;
-const PAPER = 2;
-const SCISSORS = 3;
-const LIZARD = 4;
-const SPOCK = 5;
-
-const winConditions = [
-  [SCISSORS, /* cuts */ PAPER],
-  [PAPER, /* covers */ ROCK],
-  [ROCK, /* crushes */ LIZARD],
-  [LIZARD, /* poisons */ SPOCK],
-  [SPOCK, /* smashes */ SCISSORS],
-  [SCISSORS, /* decapitates */ LIZARD],
-  [LIZARD, /* eats */ PAPER],
-  [PAPER, /* disproves */ SPOCK],
-  [SPOCK, /* vaporizes */ ROCK],
-  [ROCK, /* crushes */ SCISSORS],
-];
-
 export default (io: Summon.IO) => {
-  const player1 = io.input('player1', 'player1', summon.number());
-  const player2 = io.input('player2', 'player2', summon.number());
+  const tolerancePct = io.inputPublic('tolerancePct', summon.number());
+  const party0Comp = io.input('party0', 'party0Comp', summon.number());
+  const party1Comp = io.input('party1', 'party1Comp', summon.number());
 
-  io.outputPublic('result', battle(player1, player2));
+  io.outputPublic('result', compare(party0Comp, party1Comp, tolerancePct));
 };
 
-function battle(player1: number, player2: number) {
-  const player1Invalid = player1 < 1 || player1 > 5;
-  const player2Invalid = player2 < 1 || player2 > 5;
+const oneTrillion = 1_000_000_000_000;
 
-  if (player1Invalid && player2Invalid) {
-    return 0;
+function compare(party0Comp: number, party1Comp: number, tolerancePct: number) {
+  if (party0Comp > oneTrillion) {
+    party0Comp = oneTrillion;
   }
 
-  if (player1Invalid) {
+  if (party1Comp > oneTrillion) {
+    party1Comp = oneTrillion;
+  }
+
+  const ordered = party0Comp < party1Comp;
+
+  const [small, large] = ordered
+    ? [party0Comp, party1Comp]
+    : [party1Comp, party0Comp];
+
+  const isSignificant = large * 100 > small * (100 + tolerancePct);
+
+  if (!isSignificant) {
     return 2;
   }
 
-  if (player2Invalid) {
+  if (ordered) {
+    // If the comps are in order, then party1 has the higher comp.
     return 1;
   }
 
-  for (const [winningChoice, losingChoice] of winConditions) {
-    if (player1 === winningChoice && player2 === losingChoice) {
-      return 1;
-    }
-
-    if (player2 === winningChoice && player1 === losingChoice) {
-      return 2;
-    }
-  }
-
+  // Otherwise, party0 has the higher comp.
   return 0;
 }

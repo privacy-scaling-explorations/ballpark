@@ -19,7 +19,7 @@ export default function CheckTolerance() {
       </div>
       <div style={{ flexGrow: 2 }} />
       <button style={{ width: "100%" }} onClick={() => ctx.page.set('Input')}>Ok</button>
-      <button className="secondary" style={{ width: "100%" }} onClick={() => window.location.reload()}>Cancel</button>
+      <button className="secondary" style={{ width: "100%" }} onClick={() => ctx.reset()}>Cancel</button>
     </div>
   );
 }
