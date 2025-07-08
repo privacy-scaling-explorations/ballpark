@@ -5,17 +5,9 @@ export default function Host() {
   const ctx = Ctx.use();
 
   return (
-    <div>
+    <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', flexGrow: 1 }}>
       <h1>Share</h1>
-      <p>
-        Send your friend this url:<br />
-        <a href={window.location.href}>
-          {window.location.href}
-        </a>
-      </p>
-      <p>
-        Or have them scan:
-      </p>
+      <div style={{ flexGrow: 1 }} />
       <center>
         <QRCodeCanvas
           style={{ width: '100%', height: 'auto' }}
@@ -23,14 +15,13 @@ export default function Host() {
           value={window.location.href}
         />
       </center>
-      <p>
-        Once they have the app, return home and host a session.
-      </p>
-      <div className='main buttons'>
-        <button onClick={() => ctx.page.set('Home')}>
-          Home
-        </button>
-      </div>
+      <a style={{ textAlign: 'center' }} href={window.location.href}>
+        {window.location.href}
+      </a>
+      <div style={{ flexGrow: 2 }} />
+      <button style={{ width: '70%', alignSelf: 'center' }} onClick={() => ctx.page.set('Home')}>
+        Home
+      </button>
     </div>
   );
 }

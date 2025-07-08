@@ -13,11 +13,14 @@ export default function Home() {
         The better way to compare compensation.
       </div>
       <div style={{ flexGrow: 2 }} />
-      <button onClick={() => ctx.page.set("About")} style={{ width: "70%", alignSelf: "center" }}>
-        About
-      </button>
       <button onClick={() => ctx.page.set("Setup")} style={{ width: "70%", alignSelf: "center" }}>
         Start
+      </button>
+      <button className="secondary" onClick={() => ctx.page.set("About")} style={{ width: "70%", alignSelf: "center" }}>
+        About
+      </button>
+      <button className="secondary" onClick={() => ctx.page.set("Share")} style={{ width: "70%", alignSelf: "center" }}>
+        Share
       </button>
     </div>
   );

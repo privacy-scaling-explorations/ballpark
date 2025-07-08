@@ -45,7 +45,7 @@ body {
   width: var(--aw);
   max-width: var(--aw);
   margin: 0 auto;
-  padding: calc(0.13 * var(--aw));
+  padding: 3rem;
   box-sizing: border-box;
 }
 
@@ -82,7 +82,9 @@ button {
 }
 
 button.secondary {
-  background-color: #9291be;
+  background-color: #ffffff66;
+  color: var(--btn-color);
+  border: 2px solid var(--btn-color);
 }
 
 button:disabled {
