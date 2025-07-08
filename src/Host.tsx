@@ -32,7 +32,7 @@ export default function Host() {
         </CopyToClipboard> and send it to them.
       </div>
       <div style={{ flexGrow: 2 }} />
-      <button className="secondary" onClick={() => ctx.page.set("Home")}>Cancel</button>
+      <button className="secondary" onClick={() => window.location.reload()}>Cancel</button>
     </div>
   );
 }
