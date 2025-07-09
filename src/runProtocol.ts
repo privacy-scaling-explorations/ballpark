@@ -16,7 +16,7 @@ export default async function runProtocol(
 ): Promise<'less' | 'same' | 'more'> {
   const msgQueue = new AsyncQueue<unknown>();
 
-  const TOTAL_BYTES = 265148;
+  const TOTAL_BYTES = 1228029;
   let currentBytes = 0;
 
   socket.on('message', (msg: Uint8Array) => {
