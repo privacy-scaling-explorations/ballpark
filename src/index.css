@@ -53,6 +53,7 @@ a {
   font-weight: 500;
   color: #0000ff;
   text-decoration: inherit;
+  cursor: pointer;
 }
 a:hover {
   color: #3d3dff;
