@@ -11,6 +11,7 @@ export default async function runProtocol(
   mode: 'Host' | 'Join',
   socket: RtcPairSocket,
   comp: number,
+  tolerancePct: number,
   onProgress?: (progress: number) => void,
 ): Promise<'less' | 'same' | 'more'> {
   const msgQueue = new AsyncQueue<unknown>();
@@ -33,6 +34,7 @@ export default async function runProtocol(
   const { circuit } = summon.compile({
     path: 'circuit/main.ts',
     boolifyWidth: 48,
+    publicInputs: { tolerancePct },
     files: await getCircuitFiles(),
   });
 

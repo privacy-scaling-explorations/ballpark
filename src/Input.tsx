@@ -28,7 +28,6 @@ export default function Input() {
           onInput={e => {
             const inputEl = e.target as HTMLInputElement;
             const newValue = inputEl.value;
-            console.log({ newValue })
 
             if (newValue === "") {
               setComp("");
@@ -74,9 +73,12 @@ export default function Input() {
       </div>
       <div style={{ flexGrow: 2 }} />
       <button
+        disabled={typeof comp !== 'number'}
         style={{ width: '100%' }}
         onClick={() => {
-          alert("todo");
+          if (typeof comp === 'number') {
+            ctx.setComp(comp);
+          }
         }}
       >Calculate</button>
     </div>

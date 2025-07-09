@@ -197,6 +197,7 @@ export default class Ctx extends Emitter<{ ready(comp: number): void }> {
       this.mode,
       socket,
       comp,
+      this.tolerancePct.value,
       percentage => {
         this.mpcProgress.set(percentage);
       },
