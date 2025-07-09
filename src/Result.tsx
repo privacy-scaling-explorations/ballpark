@@ -12,10 +12,10 @@ export default function Result() {
 
   useEffect(() => {
     const listener = () => setShowDetail(false);
-    window.addEventListener("mouseup", listener);
+    window.addEventListener("pointerup", listener);
 
     return () => {
-      window.removeEventListener("mouseup", listener);
+      window.removeEventListener("pointerup", listener);
     };
   }, [setShowDetail]);
 
@@ -67,19 +67,29 @@ export default function Result() {
       <div className="title">Result</div>
       <div style={{ flexGrow: 1 }} />
       <div style={{ textAlign: "center", fontSize: "1.5rem" }}>{msg}</div>
-      <a
-        onMouseDown={() => setShowDetail(true)}
-        style={{ textAlign: "center", userSelect: "none" }}
-      >
-        Hold to see their implied range.
-      </a>
       <div
+        className="no-select"
+        onPointerDown={(e) => {
+          setShowDetail(true);
+          e.preventDefault();
+        }}
+        onTouchEnd={() => setShowDetail(false)}
         style={{
           textAlign: "center",
           border: "2px dashed black",
-          padding: "0.5rem",
+          padding: "1rem",
         }}
       >
+        <div
+          className="no-select"
+          style={{
+            color: "blue",
+            cursor: "pointer",
+            marginBottom: "2rem",
+          }}
+        >
+          Hold to see their implied range.
+        </div>
         <div style={{ visibility: showDetail ? "visible" : "hidden" }}>
           <div>{detail}</div>
           <div style={{ fontSize: "0.7rem", textWrap: "balance" }}>

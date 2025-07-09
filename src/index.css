@@ -127,3 +127,10 @@ button:disabled {
 .example-table td:not(:last-child) {
   text-align: right;
 }
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
