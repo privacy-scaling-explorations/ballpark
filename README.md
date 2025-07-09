@@ -1,6 +1,6 @@
 # Ballpark
 
-Compare salaries using MPC.
+The better way to compare compensation.
 
 Try it: https://mpc.pse.dev/apps/ballpark
 
