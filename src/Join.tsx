@@ -9,7 +9,7 @@ export default function Join() {
   const tryJoin = (text: string) => {
     let key;
 
-    if (text.startsWith('https://')) {
+    if (/^https?:\/\//.test(text)) {
       const url = new URL(text);
       key = url.hash.slice(1);
     } else {
@@ -34,7 +34,7 @@ export default function Join() {
         }}
       />
       <div>
-        Or paste the code here:
+        Or paste the url here:
         <input
           type='text'
           style={{ width: '100%', boxSizing: 'border-box' }}
